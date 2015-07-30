@@ -166,17 +166,37 @@ nav a:hover {
    ========================================================================== */
 
 
+/* flashes styling */
 
+.flashes ul {
+    margin: 0 0;
+    background: #FFD6A3;
+    color: #000;
 
+    list-style-type: none;
+    list-style: none;
+}
 
+article.flashes {
+    margin-bottom: 1em;
+}
 
+/* error styling */
+.error, .error input {
+    color:red;
+}
 
+tr.error td ul {
+    margin-top: 0;
+}
 
+tr.submit button {
+    margin-top: 20px;
+}
 
-
-
-
-
+input , button {
+    margin-left: 10px;
+}
 
 
 /* ==========================================================================
