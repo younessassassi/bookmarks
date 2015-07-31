@@ -13,7 +13,8 @@ Thermos -- Bookmarks for user {{ user.username }}
 			{% for bm in user.bookmarks %}
 				<li>
 					<a href="{{ bm.url }}">{{ bm.description }}</a>
-					<span class="timestamp">Added at {{ bm.date }}</span>
+					<span class="timestamp">Added on {{ moment(bm.date).format('MMMM Do YYYY, h:mm:ss a') }}</span>
+					
 				</li>
 			{% else %}
 				<li>This user has not added any bookmarks yet.</li>
