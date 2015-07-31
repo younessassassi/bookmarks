@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect, flash, request
+from flask import render_template, url_for, redirect, flash, request, abort
 from flask_login import login_required, login_user, logout_user, current_user
 
 from thermos import app, db, login_manager
@@ -27,8 +27,21 @@ def add():
         db.session.commit()
         flash("stored bookmark '{}'".format(description))
         return redirect(url_for('index'))
-    return render_template('add.html', form=form)
+    return render_template('bookmark_form.html', form=form, title="Add new URL")
 
+@app.route('/edit/<int:bookmark_id>', methods=['GET', 'POST'])
+@login_required
+def edit_bookmark(bookmark_id):
+    bookmark = Bookmark.query.get_or_404(bookmark_id)
+    if current_user != bookmark.user:
+        abort(403)
+    form = BookmarkForm(obj=bookmark)
+    if form.validate_on_submit():
+        form.populate_obj(bookmark)
+        db.session.commit()
+        flash("Stored '{}'".format(bookmark.description))
+        return redirect(url_for('user', username=current_user.username))
+    return render_template('bookmark_form.html', form=form, title="Edit bookmark")
 
 @app.route('/user/<username>')
 def user(username):
@@ -66,6 +79,11 @@ def signup():
         flash('Welcome, {}! Please Login.'.format(user.username))
         return redirect(url_for('login'))
     return render_template("signup.html", form=form)
+
+@app.errorhandler(403)
+def page_not_found(e):
+    return render_template('403.html'), 403
+
 
 @app.errorhandler(404)
 def page_not_found(e):

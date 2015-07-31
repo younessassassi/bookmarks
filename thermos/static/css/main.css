@@ -166,6 +166,15 @@ nav a:hover {
    ========================================================================== */
 
 
+/* link styles */
+a,
+a:visited {
+    color:#1E5373;
+}
+a:hover, aside a:hover, aside a:visited:hover {
+    color: #D39447;
+}
+
 /* flashes styling */
 
 .flashes ul {
@@ -198,6 +207,39 @@ input , button {
     margin-left: 10px;
 }
 
+/* bookmark list styling */
+ul.bookmarks {
+    list-style: none none;
+    padding-left: 0;
+}
+
+ul.bookmarks h1, 
+ul.bookmarks h2, 
+ul.bookmarks h3, 
+ul.bookmarks h4,
+ul.bookmarks h5,
+ul.bookmarks h6 {
+    color: #1E5373;
+}
+
+ul.bookmarks li {
+    padding-bottom: .5em;
+    border-top: 1px solid #7EA6BF;
+    padding: 1em 0;
+}
+
+a.header h3 {
+    margin: 0 0;
+}
+
+div.info {
+    font-size: .95em;
+    color: #666666;
+}
+
+span.editlinks {
+    float: right;
+}
 
 /* ==========================================================================
    Media Queries
