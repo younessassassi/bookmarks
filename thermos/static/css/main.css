@@ -250,10 +250,21 @@ ul.bookmarks h6 {
     color: #1E5373;
 }
 
-ul.bookmarks li {
+ul.bookmarks {
+   list-style: none none;
+   padding-left: 0;
+}
+
+.bookmark {
     padding-bottom: .5em;
     border-top: 1px solid #7EA6BF;
     padding: 1em 0;
+}
+
+a.header {
+    color: #326786;
+    text-decoration: none;
+    display: block;
 }
 
 a.header h3 {
