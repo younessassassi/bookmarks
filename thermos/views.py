@@ -3,7 +3,7 @@ from flask_login import login_required, login_user, logout_user, current_user
 
 from thermos import app, db, login_manager
 from forms import BookmarkForm, LoginForm, SignupForm
-from models import User, Bookmark
+from models import User, Bookmark, Tag
 
 @login_manager.user_loader
 def load_user(userid):
@@ -22,7 +22,8 @@ def add():
     if form.validate_on_submit():
         url = form.url.data
         description = form.description.data
-        bm = Bookmark(url=url, description=description, user=current_user)
+        tags = form.tags.data
+        bm = Bookmark(url=url, description=description, user=current_user, tags=tags)
         db.session.add(bm)
         db.session.commit()
         flash("stored bookmark '{}'".format(description))
@@ -80,6 +81,11 @@ def signup():
         return redirect(url_for('login'))
     return render_template("signup.html", form=form)
 
+@app.route('/tag/<name>')
+def tag(name):
+    tag = Tag.query.filter_by(name=name).first_or_404()
+    return render_template('tag.html', tag=tag)
+
 @app.errorhandler(403)
 def page_not_found(e):
     return render_template('403.html'), 403
@@ -93,3 +99,7 @@ def page_not_found(e):
 @app.errorhandler(500)
 def page_not_found(e):
     return render_template('500.html'), 500
+
+@app.context_processor
+def inject_tags():
+    return dict(all_tags=Tag.all)

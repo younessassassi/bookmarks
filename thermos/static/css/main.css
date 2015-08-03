@@ -175,6 +175,34 @@ a:hover, aside a:hover, aside a:visited:hover {
     color: #D39447;
 }
 
+aside a {
+    color: #FFD6A3;
+}
+
+aside a:hover {
+    color: #F5BB73;
+}
+
+aside a:visted {
+    color: #D39447;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #1E5373;
+}
+
+.main aside h3,
+footer h3,
+footer a,
+footer a:visited {
+    color: white;
+}
+
+a.header, .tags a, .info a{
+    background: white;
+    color:#1E5373;
+}
+
 /* flashes styling */
 
 .flashes ul {
